@@ -1,16 +1,17 @@
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+let cors = require("cors");
+let router = require("./routes/index")
+let app = express();
 
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-var app = express();
-
-
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(router)
 app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
